@@ -4,10 +4,9 @@
 
 using namespace std;
 
-int main()
-{
+int main(){
 	//Create Window
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong");
+	sf::RenderWindow window(sf::VideoMode::getFullscreenModes().front(), "Pong", sf::Style::Fullscreen);
 
 	//Render Title Text with Font in the middle of the screen
 	sf::Font font;
@@ -102,10 +101,13 @@ int main()
 				//Mouse click functionality
 				case sf::Event::MouseButtonPressed:
 					if (event.key.code == sf::Mouse::Left) {
+						//User clicking quit
 						if (quitText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
 							selectSound.play();
 							window.close();
-						} else if (playText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
+						} 
+						//User clicking play
+						else if (playText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
 							selectSound.play();
 							//Send to game
 						}
