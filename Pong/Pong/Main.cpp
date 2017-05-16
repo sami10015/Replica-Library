@@ -39,14 +39,33 @@ int main()
 	quitText.setOrigin(sf::Vector2f(quitText.getLocalBounds().width / 2, quitText.getLocalBounds().height / 2));
 	quitText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .85));
 
+	//Variable to check which option is selected on the keyboard
+	bool playSelected = true;
+
 	//Title Screen Game Loop
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+			switch (event.type) {
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::KeyPressed:
+					if (event.key.code == sf::Keyboard::Up && playSelected == false) {
+						playText.setStyle(sf::Text::Underlined);
+						quitText.setStyle(sf::Text::Regular);
+						playSelected = true;
+					}
+					if (event.key.code == sf::Keyboard::Down && playSelected == true) {
+						playText.setStyle(sf::Text::Regular);
+						quitText.setStyle(sf::Text::Underlined);
+						playSelected = false;
+					}
+				default:
+					break;
+			}
 		}
 
 		window.clear();
