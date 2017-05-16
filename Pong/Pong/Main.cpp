@@ -85,14 +85,36 @@ int main()
 						selectSound.play();
 						playSelected = false;
 					}
+					if (event.key.code == sf::Keyboard::Return) {
+						if (playSelected) {
+							//Send to game
+						}
+						else {
+							selectSound.play();
+							window.close();
+							break;
+						}
+					}
 					if (event.key.code == sf::Keyboard::Escape) {
 						window.close();
 						break;
+					}
+				//Mouse click functionality
+				case sf::Event::MouseButtonPressed:
+					if (event.key.code == sf::Mouse::Left) {
+						if (quitText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
+							selectSound.play();
+							window.close();
+						} else if (playText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
+							selectSound.play();
+							//Send to game
+						}
 					}
 				default:
 					break;
 			}
 		}
+
 
 		window.clear();
 
