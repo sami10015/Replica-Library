@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 	//Create Window
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong works!");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong");
 
 	//Render Title Text with Font in the middle of the screen
 	sf::Font font;
@@ -31,6 +31,14 @@ int main()
 	playText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .7));
 	playText.setStyle(sf::Text::Underlined);
 
+	sf::Text quitText;
+	quitText.setFont(font);
+	quitText.setString("QUIT");
+	quitText.setCharacterSize(36);
+	quitText.setFillColor(sf::Color::White);
+	quitText.setOrigin(sf::Vector2f(quitText.getLocalBounds().width / 2, quitText.getLocalBounds().height / 2));
+	quitText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .85));
+
 	//Title Screen Game Loop
 	while (window.isOpen())
 	{
@@ -45,6 +53,7 @@ int main()
 
 		window.draw(titleText);
 		window.draw(playText);
+		window.draw(quitText);
 
 		window.display();
 	}
