@@ -39,14 +39,23 @@ int main()
 	quitText.setOrigin(sf::Vector2f(quitText.getLocalBounds().width / 2, quitText.getLocalBounds().height / 2));
 	quitText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .85));
 
-	//Load background and selection music/sounds
+	//Load background music
 	sf::Music backgroundMusic;
 	if (!backgroundMusic.openFromFile("Sounds/Background.ogg")) {
 		cout << "Failed to load background music";
 	}
-	backgroundMusic.setVolume(25);
+	backgroundMusic.setVolume(10);
 	backgroundMusic.play();
 	backgroundMusic.setLoop(true);
+
+	//Load selection sound and soundbuffer combo
+	sf::Sound selectSound;
+	sf::SoundBuffer selectSoundBuffer;
+	if (!selectSoundBuffer.loadFromFile("Sounds/Select.wav")) {
+		cout << "Failed to load selection sound";
+	}
+	selectSound.setBuffer(selectSoundBuffer);
+	selectSound.setVolume(30);
 
 	//Variable to check which option is selected on the keyboard
 	bool playSelected = true;
@@ -58,19 +67,27 @@ int main()
 		while (window.pollEvent(event))
 		{
 			switch (event.type) {
+				//Closes the window if the x button is clicked
 				case sf::Event::Closed:
 					window.close();
 					break;
+				//Checks which keys are pressed on the keyboards and acts accordingly
 				case sf::Event::KeyPressed:
 					if (event.key.code == sf::Keyboard::Up && playSelected == false) {
 						playText.setStyle(sf::Text::Underlined);
 						quitText.setStyle(sf::Text::Regular);
+						selectSound.play();
 						playSelected = true;
 					}
 					if (event.key.code == sf::Keyboard::Down && playSelected == true) {
 						playText.setStyle(sf::Text::Regular);
 						quitText.setStyle(sf::Text::Underlined);
+						selectSound.play();
 						playSelected = false;
+					}
+					if (event.key.code == sf::Keyboard::Escape) {
+						window.close();
+						break;
 					}
 				default:
 					break;
