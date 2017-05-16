@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 using namespace std;
@@ -30,7 +31,6 @@ int main()
 	playText.setOrigin(sf::Vector2f(playText.getLocalBounds().width / 2, playText.getLocalBounds().height / 2));
 	playText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .7));
 	playText.setStyle(sf::Text::Underlined);
-
 	sf::Text quitText;
 	quitText.setFont(font);
 	quitText.setString("QUIT");
@@ -38,6 +38,15 @@ int main()
 	quitText.setFillColor(sf::Color::White);
 	quitText.setOrigin(sf::Vector2f(quitText.getLocalBounds().width / 2, quitText.getLocalBounds().height / 2));
 	quitText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .85));
+
+	//Load background and selection music/sounds
+	sf::Music backgroundMusic;
+	if (!backgroundMusic.openFromFile("Sounds/Background.ogg")) {
+		cout << "Failed to load background music";
+	}
+	backgroundMusic.setVolume(25);
+	backgroundMusic.play();
+	backgroundMusic.setLoop(true);
 
 	//Variable to check which option is selected on the keyboard
 	bool playSelected = true;
