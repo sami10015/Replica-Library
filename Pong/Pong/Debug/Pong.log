@@ -1,2 +1,4 @@
-﻿  Pong.vcxproj -> C:\Users\sami10015\Documents\Replica-Library\Pong\Debug\Pong.exe
+﻿  Main.cpp
+c:\users\sami10015\documents\replica-library\pong\pong\main.cpp(23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Pong.vcxproj -> C:\Users\sami10015\Documents\Replica-Library\Pong\Debug\Pong.exe
   Pong.vcxproj -> C:\Users\sami10015\Documents\Replica-Library\Pong\Debug\Pong.pdb (Partial PDB)

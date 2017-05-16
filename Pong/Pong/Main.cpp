@@ -1,11 +1,28 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
+using namespace std;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	//Create Window
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong works!");
 
+	//Render Text with Font
+	sf::Font font;
+	if (!font.loadFromFile("Fonts/BlindSignature.ttf")) {
+		cout << "Failed to load font";
+	}
+	sf::Text text;
+	text.setFont(font);
+	text.setString("PONG");
+	text.setCharacterSize(72);
+	text.setFillColor(sf::Color::White);
+	text.setStyle(sf::Text::Underlined);
+	text.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .25));
+
+
+	// Game Loop
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -16,7 +33,9 @@ int main()
 		}
 
 		window.clear();
-		window.draw(shape);
+
+		window.draw(text);
+
 		window.display();
 	}
 
