@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "Player.h"
 #include <iostream>
 
 using namespace std;
@@ -59,6 +60,12 @@ int main(){
 	//Variable to check which option is selected on the keyboard
 	bool playSelected = true;
 
+	//Variable to check if the user selected play or not
+	bool startGame = false;
+
+	Player player1;
+	player1.setPosition(sf::Vector2f(0, window.getSize().y / 2));
+
 	//Title Screen Game Loop
 	while (window.isOpen())
 	{
@@ -86,7 +93,9 @@ int main(){
 					}
 					if (event.key.code == sf::Keyboard::Return) {
 						if (playSelected) {
-							//Send to game
+							selectSound.play();
+							startGame = true;
+							break;
 						}
 						else {
 							selectSound.play();
@@ -109,17 +118,17 @@ int main(){
 						//User clicking play
 						else if (playText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
 							selectSound.play();
-							//Send to game
+							startGame = true;
+							break;
 						}
 					}
 				default:
 					break;
 			}
 		}
-
-
 		window.clear();
 
+		window.draw(player1.getSprite());
 		window.draw(titleText);
 		window.draw(playText);
 		window.draw(quitText);
@@ -127,5 +136,11 @@ int main(){
 		window.display();
 	}
 
-	return 0;
+	if (startGame == true) {
+		//Send window to game object
+		return 0;
+	}
+	else {
+		return 0;
+	}
 }

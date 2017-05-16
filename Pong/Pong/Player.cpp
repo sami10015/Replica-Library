@@ -4,13 +4,14 @@
 
 using namespace std;
 
-//Constructor
 Player::Player() {
 	sf::Texture spriteTexture;
-	if (!spriteTexture.loadFromFile("Pong.png", sf::IntRect(32, 103, 4, 14))) {
+	if (!spriteTexture.loadFromFile("Sprites/Pong.png", sf::IntRect(32, 103, 4, 14))) {
 		cout << "Failed to load pong sprite sheet";
 	}
 	playerSprite.setTexture(spriteTexture);
+	playerSprite.setScale(6, 6);
+	playerSprite.setOrigin(sf::Vector2f(0, playerSprite.getLocalBounds().height / 2));
 }
 
 sf::Sprite Player::getSprite() {
