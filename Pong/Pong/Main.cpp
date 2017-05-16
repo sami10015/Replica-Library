@@ -8,21 +8,30 @@ int main()
 	//Create Window
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Pong works!");
 
-	//Render Text with Font
+	//Render Title Text with Font in the middle of the screen
 	sf::Font font;
 	if (!font.loadFromFile("Fonts/BlindSignature.ttf")) {
 		cout << "Failed to load font";
 	}
-	sf::Text text;
-	text.setFont(font);
-	text.setString("PONG");
-	text.setCharacterSize(72);
-	text.setFillColor(sf::Color::White);
-	text.setStyle(sf::Text::Underlined);
-	text.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .25));
+	sf::Text titleText;
+	titleText.setFont(font);
+	titleText.setString("PONG");
+	titleText.setCharacterSize(72);
+	titleText.setFillColor(sf::Color::White);
+	titleText.setOrigin(sf::Vector2f(titleText.getLocalBounds().width / 2, titleText.getLocalBounds().height / 2));
+	titleText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .25));
 
+	//Render the rest of the text below the title
+	sf::Text playText;
+	playText.setFont(font);
+	playText.setString("PLAY");
+	playText.setCharacterSize(36);
+	playText.setFillColor(sf::Color::White);
+	playText.setOrigin(sf::Vector2f(playText.getLocalBounds().width / 2, playText.getLocalBounds().height / 2));
+	playText.setPosition(sf::Vector2f(window.getSize().x*.5, window.getSize().y * .7));
+	playText.setStyle(sf::Text::Underlined);
 
-	// Game Loop
+	//Title Screen Game Loop
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -34,7 +43,8 @@ int main()
 
 		window.clear();
 
-		window.draw(text);
+		window.draw(titleText);
+		window.draw(playText);
 
 		window.display();
 	}
