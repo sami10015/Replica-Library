@@ -1,13 +1,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include "Player.h"
 
 using namespace std;
 
 Game::Game(sf::RenderWindow& window) {
 	player1.setPosition(sf::Vector2f(0, window.getSize().y / 2));
 	//This insanely long line of code makes sure that the player2 pong board is in middle of the right hand side of the window
-	player2.setPosition(sf::Vector2f(window.getSize().y - player2.getSprite().getLocalBounds().width, window.getSize().y / 2));
+	player2.setPosition(sf::Vector2f(window.getSize().x - player2.getSprite().getGlobalBounds().width, window.getSize().y / 2));
 
 	//Set the border in the middle of the screen
 	border.setSize(sf::Vector2f(10, window.getSize().y));
@@ -38,4 +39,27 @@ Game::Game(sf::RenderWindow& window) {
 
 void Game::display(sf::RenderWindow& window) {
 	window.clear();
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+			if (event.key.code == sf::Keyboard::Escape) {
+				window.close();
+			}
+		}
+
+		window.clear();
+
+		window.draw(player1.getSprite());
+		window.draw(player2.getSprite());
+		window.draw(border);
+		window.draw(playerText1);
+		window.draw(playerText2);
+
+		window.display();
+	}
+	return;
 }

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Player.h"
+#include "Game.h"
 #include <iostream>
 
 using namespace std;
@@ -60,14 +61,12 @@ int main(){
 	//Variable to check which option is selected on the keyboard
 	bool playSelected = true;
 
-	//Variable to check if the user selected play or not
+	//Variables to check if the user selected play or not
 	bool startGame = false;
-
-	Player player1;
-	player1.setPosition(sf::Vector2f(0, window.getSize().y / 2));
+	bool onTitleScreen = true;
 
 	//Title Screen Game Loop
-	while (window.isOpen())
+	while (onTitleScreen)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -95,17 +94,17 @@ int main(){
 						if (playSelected) {
 							selectSound.play();
 							startGame = true;
-							break;
+							onTitleScreen = false;
 						}
 						else {
 							selectSound.play();
 							window.close();
-							break;
+							onTitleScreen = false;
 						}
 					}
 					if (event.key.code == sf::Keyboard::Escape) {
 						window.close();
-						break;
+						onTitleScreen = false;
 					}
 				//Mouse click functionality
 				case sf::Event::MouseButtonPressed:
@@ -114,12 +113,13 @@ int main(){
 						if (quitText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
 							selectSound.play();
 							window.close();
+							onTitleScreen = false;
 						} 
 						//User clicking play
 						else if (playText.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
 							selectSound.play();
 							startGame = true;
-							break;
+							onTitleScreen = false;
 						}
 					}
 				default:
@@ -128,7 +128,6 @@ int main(){
 		}
 		window.clear();
 
-		window.draw(player1.getSprite());
 		window.draw(titleText);
 		window.draw(playText);
 		window.draw(quitText);
@@ -138,9 +137,12 @@ int main(){
 
 	if (startGame == true) {
 		//Send window to game object
+		Game game(window);
+		game.display(window);
 		return 0;
 	}
 	else {
+		window.close();
 		return 0;
 	}
 }
