@@ -39,6 +39,12 @@ Game::Game(sf::RenderWindow& window) {
 
 void Game::display(sf::RenderWindow& window) {
 	window.clear();
+	int SPRITE_SPEED = 2;
+
+	//Flags for key pressing
+	bool upFlag = false;
+	bool downFlag = false;
+	
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -46,9 +52,45 @@ void Game::display(sf::RenderWindow& window) {
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.key.code == sf::Keyboard::Escape) {
-				window.close();
+
+			//If a key is pressed
+			if (event.type == sf::Event::KeyPressed) {
+				switch (event.key.code) {
+					case sf::Keyboard::Escape:
+						window.close();
+					case sf::Keyboard::W:
+						upFlag = true;
+						break;
+					case sf::Keyboard::S:
+						downFlag = true;
+						break;
+					default:
+						break;
+				}
 			}
+			
+			//If a key is released
+			if (event.type == sf::Event::KeyReleased) {
+				switch (event.key.code) {
+					case sf::Keyboard::W:
+						upFlag = false;
+						break;
+					case sf::Keyboard::S:
+						downFlag = false;
+						break;
+				}
+			}
+		}
+
+		if (upFlag) {
+			int x = player1.getPosition().x;
+			int y = player1.getPosition().y;
+			player1.setPosition(sf::Vector2f(x, y + SPRITE_SPEED));
+		}
+		else if (downFlag) {
+			int x = player1.getPosition().x;
+			int y = player1.getPosition().y;
+			player1.setPosition(sf::Vector2f(x, y - SPRITE_SPEED));
 		}
 
 		window.clear();
