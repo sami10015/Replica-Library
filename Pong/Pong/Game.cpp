@@ -14,6 +14,7 @@ Game::Game(sf::RenderWindow& window) {
 	border.setSize(sf::Vector2f(10, window.getSize().y));
 	border.setOrigin(sf::Vector2f(border.getLocalBounds().width / 2, 0));
 	border.setPosition(sf::Vector2f(window.getSize().x / 2, 0));
+	border.setFillColor(sf::Color::Blue);
 
 	playerScore1 = 0;
 	playerScore2 = 0;
@@ -44,7 +45,8 @@ void Game::display(sf::RenderWindow& window) {
 	//Flags for key pressing
 	bool upFlag = false;
 	bool downFlag = false;
-	
+
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -56,28 +58,28 @@ void Game::display(sf::RenderWindow& window) {
 			//If a key is pressed
 			if (event.type == sf::Event::KeyPressed) {
 				switch (event.key.code) {
-					case sf::Keyboard::Escape:
-						window.close();
-					case sf::Keyboard::W:
-						upFlag = true;
-						break;
-					case sf::Keyboard::S:
-						downFlag = true;
-						break;
-					default:
-						break;
+				case sf::Keyboard::Escape:
+					window.close();
+				case sf::Keyboard::Up:
+					upFlag = true;
+					break;
+				case sf::Keyboard::Down:
+					downFlag = true;
+					break;
+				default:
+					break;
 				}
 			}
-			
+
 			//If a key is released
 			if (event.type == sf::Event::KeyReleased) {
 				switch (event.key.code) {
-					case sf::Keyboard::W:
-						upFlag = false;
-						break;
-					case sf::Keyboard::S:
-						downFlag = false;
-						break;
+				case sf::Keyboard::Up:
+					upFlag = false;
+					break;
+				case sf::Keyboard::Down:
+					downFlag = false;
+					break;
 				}
 			}
 		}
@@ -85,12 +87,24 @@ void Game::display(sf::RenderWindow& window) {
 		if (upFlag) {
 			int x = player1.getPosition().x;
 			int y = player1.getPosition().y;
-			player1.setPosition(sf::Vector2f(x, y + SPRITE_SPEED));
+			if (y - SPRITE_SPEED <= 0) {
+				y = 0;
+			}
+			else {
+				y = y - SPRITE_SPEED;
+			}
+			player1.setPosition(sf::Vector2f(x, y));
 		}
 		else if (downFlag) {
 			int x = player1.getPosition().x;
 			int y = player1.getPosition().y;
-			player1.setPosition(sf::Vector2f(x, y - SPRITE_SPEED));
+			if (y + SPRITE_SPEED >= window.getSize().y){
+				y = window.getSize().y;
+			}
+			else {
+				y = y + SPRITE_SPEED;
+			}
+			player1.setPosition(sf::Vector2f(x, y));
 		}
 
 		window.clear();

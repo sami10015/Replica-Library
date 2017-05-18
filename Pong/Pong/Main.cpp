@@ -136,7 +136,8 @@ int main(){
 	}
 
 	if (startGame == true) {
-		//Send window to game object
+		//Turn off music and send window to game object
+		backgroundMusic.stop();
 		Game game(window);
 		game.display(window);
 		return 0;
