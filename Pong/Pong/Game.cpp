@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "Player.h"
+#include "Pong.h"
 
 using namespace std;
 
@@ -45,6 +46,8 @@ void Game::display(sf::RenderWindow& window) {
 	//Flags for key pressing
 	bool upFlag = false;
 	bool downFlag = false;
+
+	Pong pong(sf::Vector2f(window.getSize()));
 
 
 	while (window.isOpen())
@@ -114,6 +117,7 @@ void Game::display(sf::RenderWindow& window) {
 		window.draw(border);
 		window.draw(playerText1);
 		window.draw(playerText2);
+		window.draw(pong.getPongBall());
 
 		window.display();
 	}
