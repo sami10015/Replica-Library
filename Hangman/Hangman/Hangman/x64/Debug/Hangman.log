@@ -1,4 +1,6 @@
 ﻿  TitleScreen.cpp
-c:\users\sami10015\documents\replica-library\hangman\hangman\hangman\titlescreen.cpp(7): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\sami10015\documents\replica-library\hangman\hangman\hangman\titlescreen.cpp(9): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\sami10015\documents\replica-library\hangman\hangman\hangman\titlescreen.cpp(15): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\sami10015\documents\replica-library\hangman\hangman\hangman\titlescreen.cpp(24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Hangman.vcxproj -> C:\Users\sami10015\Documents\Replica-Library\Hangman\Hangman\x64\Debug\Hangman.exe
   Hangman.vcxproj -> C:\Users\sami10015\Documents\Replica-Library\Hangman\Hangman\x64\Debug\Hangman.pdb (Partial PDB)
