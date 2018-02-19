@@ -1,6 +1,13 @@
 #include "TitleScreen.h"
+#include <iostream>
 
 TitleScreen::TitleScreen(sf::RenderWindow & window){
+	if (!buffer.loadFromFile("Sounds/Background.ogg")) {
+		std::cout << "Something went wrong" << std::endl;
+	}
+	backgroundMusic.setBuffer(buffer);
+	backgroundMusic.play();
+
 	font.loadFromFile("Fonts/Pacifico.ttf");
 	//Title text set up
 	title.setFont(font);
