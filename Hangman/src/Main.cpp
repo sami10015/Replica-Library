@@ -7,7 +7,7 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(false);
 
-	//Prompt titleScreen
+	//Prompt titleScreen, which starts the game
 	TitleScreen titleScreen(window);
 
 	return 0;
